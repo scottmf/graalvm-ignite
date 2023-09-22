@@ -29,21 +29,25 @@ tasks.named('test') {
 graalvmNative {
         binaries {
                 main {
-                        buildArgs.add("--initialize-at-build-time=org.slf4j.LoggerFactory,ch.qos.logback")
-                        buildArgs.add("-J--add-opens=java.base/java.time=ALL-UNNAMED")
-                        buildArgs.add("-J--add-opens=jdk.management/com.sun.management.internal=ALL-UNNAMED")
-                        buildArgs.add("-J--add-opens=java.base/jdk.internal.misc=ALL-UNNAMED")
-                        buildArgs.add("-J--add-opens=java.base/sun.nio.ch=ALL-UNNAMED")
-                        buildArgs.add("-J--add-opens=java.management/com.sun.jmx.mbeanserver=ALL-UNNAMED")
-                        buildArgs.add("-J--add-opens=jdk.internal.jvmstat/sun.jvmstat.monitor=ALL-UNNAMED")
-                        buildArgs.add("-J--add-opens=java.base/sun.reflect.generics.reflectiveObjects=ALL-UNNAMED")
-                        buildArgs.add("-J--add-opens=java.base/java.io=ALL-UNNAMED")
-                        buildArgs.add("-J--add-opens=java.base/java.nio=ALL-UNNAMED")
-                        buildArgs.add("-J--add-opens=java.base/java.util=ALL-UNNAMED")
-                        buildArgs.add("-J--add-opens=java.base/java.util.concurrent=ALL-UNNAMED")
-                        buildArgs.add("-J--add-opens=java.base/java.util.concurrent.locks=ALL-UNNAMED")
-                        buildArgs.add("-J--add-opens=java.base/java.lang=ALL-UNNAMED")
-                        mainClass = 'com.vmware.atlas.graalvm.GraalVmApplication'
+                        buildArgs.add("--add-opens=java.base/java.time=ALL-UNNAMED")
+                        buildArgs.add("--add-opens=jdk.management/com.sun.management.internal=ALL-UNNAMED")
+                        buildArgs.add("--add-opens=java.base/jdk.internal.misc=ALL-UNNAMED")
+                        buildArgs.add("--add-exports java.base/jdk.internal.misc=ALL-UNNAMED")
+                        buildArgs.add("--add-opens=java.base/sun.nio.ch=ALL-UNNAMED")
+                        buildArgs.add("--add-opens=java.management/com.sun.jmx.mbeanserver=ALL-UNNAMED")
+                        buildArgs.add("--add-opens=jdk.internal.jvmstat/sun.jvmstat.monitor=ALL-UNNAMED")
+                        buildArgs.add("--add-opens=java.base/sun.reflect.generics.reflectiveObjects=ALL-UNNAMED")
+                        buildArgs.add("--add-opens=java.base/java.io=ALL-UNNAMED")
+                        buildArgs.add("--add-opens=java.base/java.nio=ALL-UNNAMED")
+                        buildArgs.add("--add-opens=java.base/java.util=ALL-UNNAMED")
+                        buildArgs.add("--add-opens=java.base/java.util.concurrent=ALL-UNNAMED")
+                        buildArgs.add("--add-opens=java.base/java.util.concurrent.locks=ALL-UNNAMED")
+                        buildArgs.add("--add-opens=java.base/java.lang=ALL-UNNAMED")
+                        buildArgs.add("--add-exports=java.base/sun.nio.ch=ALL-UNNAMED")
+                        buildArgs.add("--add-exports=java.management/com.sun.jmx.mbeanserver=ALL-UNNAMED")
+                        buildArgs.add("--add-exports=jdk.internal.jvmstat/sun.jvmstat.monitor=ALL-UNNAMED")
+                        buildArgs.add("--add-exports=java.base/sun.reflect.generics.reflectiveObjects=ALL-UNNAMED")
+                        buildArgs.add("--add-opens=jdk.management/com.sun.management.internal=ALL-UNNAMED")
                 }
         }
 }
