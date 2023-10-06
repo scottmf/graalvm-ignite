@@ -1,5 +1,60 @@
 # To reproduce
 
+## Attempt 4 - JDK21
+```sh
+$ git clone git@github.com:apache/ignite.git
+$ cd ignite
+$ mvn -N wrapper:wrapper -Dmaven=3.8.3
+$ ./mvnw clean install -DskipTests
+$ cd -
+$ sdk install java 21-graal
+$ sdk use java 21-graal
+$ ./gradlew clean bootRun
+...
+$ time build/native/nativeCompile/graalvm-ignite
+...
+...
+2023-10-06T14:33:39.983-07:00  INFO 92649 --- [ionShutdownHook] o.a.i.internal.IgniteKernal%graalvm      :
+
+>>> +-------------------------------------------------------------------------------------------+
+>>> Ignite ver. 2.16.0-SNAPSHOT#20231006-sha1:ad0b96b248b3ee56e240bdb2b614c145b5657c32 stopped OK
+>>> +-------------------------------------------------------------------------------------------+
+>>> Ignite instance name: graalvm
+>>> Grid uptime: 00:00:00.023
+
+real	0m1.959s
+user	0m0.103s
+sys	0m0.174s
+```
+
+## Attempt 3 - JDK17
+```sh
+$ sdk install java 17.0.8-graal
+$ sdk use java 17.0.8-graal
+$ ./gradlew clean bootRun
+99
+<===========--> 90% EXECUTING [7s]
+> :bootRun
+^C$ ./gradlew nativeCompile
+$ build/native/nativeCompile/graalvm-ignite
+Fatal error: unhandled exception in isolate 0x107800000: com.oracle.svm.core.jdk.UnsupportedFeatureError: Code that was considered unreachable by closed-world analysis was reached.
+    at com.oracle.svm.core.util.VMError.unsupportedFeature(VMError.java:92)
+    at com.oracle.svm.core.snippets.SnippetRuntime.unsupportedFeature(SnippetRuntime.java:173)
+    at java.util.concurrent.locks.AbstractQueuedSynchronizer.release(AbstractQueuedSynchronizer.java:1007)
+    at java.util.concurrent.locks.ReentrantLock.unlock(ReentrantLock.java:494)
+    at com.oracle.svm.core.jdk.NativeLibrarySupport.addLibrary(NativeLibrarySupport.java:215)
+    at com.oracle.svm.core.jdk.NativeLibrarySupport.loadLibrary0(NativeLibrarySupport.java:160)
+    at com.oracle.svm.core.jdk.NativeLibrarySupport.loadLibraryRelative(NativeLibrarySupport.java:105)
+    at java.lang.ClassLoader.loadLibrary(ClassLoader.java:50)
+    at java.lang.Runtime.loadLibrary0(Runtime.java:818)
+    at java.lang.System.loadLibrary(System.java:1989)
+    at com.oracle.svm.core.jdk.JNIPlatformNativeLibrarySupport.loadJavaLibrary(JNIPlatformNativeLibrarySupport.java:44)
+    at com.oracle.svm.core.posix.PosixNativeLibrarySupport.loadJavaLibrary(PosixNativeLibraryFeature.java:117)
+    at com.oracle.svm.core.posix.PosixNativeLibrarySupport.initializeBuiltinLibraries(PosixNativeLibraryFeature.java:98)
+    at com.oracle.svm.core.graal.snippets.CEntryPointSnippets.initializeIsolate(CEntryPointSnippets.java:346)
+    at com.oracle.svm.core.JavaMainWrapper$EnterCreateIsolateWithCArgumentsPrologue.enter(JavaMainWrapper.java:387)
+```
+
 ## Attempt 2
 ```sh
 $ ./gradlew nativeCompile
