@@ -1,5 +1,34 @@
 # To reproduce
 
+## Attempt 5 - JDK21
+Contains some optimizations
+```sh
+$ git clone git@github.com:apache/ignite.git
+$ cd ignite
+$ mvn -N wrapper:wrapper -Dmaven=3.8.3
+$ ./mvnw clean install -DskipTests
+$ cd -
+$ sdk install java 21-graal
+$ sdk use java 21-graal
+$ ./gradlew clean bootRun
+...
+$ time build/native/nativeCompile/graalvm-ignite
+...
+2023-10-08T11:22:47.269-07:00  INFO 95681 --- [           main] com.example.demo.GraalVmApplication      : Started GraalVmApplication in 0.083 seconds (process running for 0.099)
+...
+>>> +-------------------------------------------------------------------------------------------+
+>>> Ignite ver. 2.16.0-SNAPSHOT#20230615-sha1:fc51f0e43275953ab6a77c7f4d10ba32d1a640b6 stopped OK
+>>> +-------------------------------------------------------------------------------------------+
+>>> Ignite instance name: graalvm
+>>> Grid uptime: 00:00:00.021
+
+
+
+real	0m0.256s
+user	0m0.095s
+sys	0m0.060s
+```
+
 ## Attempt 4 - JDK21
 ```sh
 $ git clone git@github.com:apache/ignite.git

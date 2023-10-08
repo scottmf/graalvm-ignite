@@ -7,11 +7,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
-@SpringBootApplication
+@SpringBootApplication(proxyBeanMethods = false)
 public class GraalVmApplication {
 
 	public static void main(String[] args) {
-		System.setProperty(IgniteSystemProperties.IGNITE_LOCAL_HOST, "localhost");
 		ConfigurableApplicationContext ctx = SpringApplication.run(GraalVmApplication.class, args);
 		Ignite ignite = ctx.getBean(Ignite.class);
 		IgniteCache<Integer, Integer> myCache = ignite.getOrCreateCache("my-cache");
