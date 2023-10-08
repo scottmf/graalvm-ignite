@@ -5,6 +5,8 @@ Contains some optimizations
 ```sh
 $ git clone git@github.com:apache/ignite.git
 $ cd ignite
+$ sdk install java 11.0.20.1-librca
+$ sdk use java 11.0.20.1-librca
 $ mvn -N wrapper:wrapper -Dmaven=3.8.3
 $ ./mvnw clean install -DskipTests
 $ cd -
@@ -33,6 +35,8 @@ sys	0m0.060s
 ```sh
 $ git clone git@github.com:apache/ignite.git
 $ cd ignite
+$ sdk install java 11.0.20.1-librca
+$ sdk use java 11.0.20.1-librca
 $ mvn -N wrapper:wrapper -Dmaven=3.8.3
 $ ./mvnw clean install -DskipTests
 $ cd -
